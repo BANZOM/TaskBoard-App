@@ -2,9 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 from app.core.database import get_db
-from app.core.auth import get_current_user, require_view, require_create, require_edit, require_delete
+from app.core.auth import AuthUser, get_current_user, require_view, require_create, require_edit, require_delete
 from app.models.task import Task
-from app.core.auth import AuthUser
 from app.schemas.task import TaskCreate, TaskUpdate, TaskStatusUpdate, TaskResponse
 
 router = APIRouter(
