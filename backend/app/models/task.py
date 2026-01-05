@@ -1,5 +1,5 @@
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import Column, String, Text, DateTime, Enum
 import enum
 from app.core.database import Base
@@ -19,5 +19,5 @@ class Task(Base):
     status = Column(Enum(TaskStatus), default=TaskStatus.PENDING, nullable=False)
     org_id = Column(String, nullable=False, index=True)
     created_by = Column(String, nullable=False)
-    created_at = Column(DateTime, default=datetime.now(datetime.timezone.utc), nullable=False)
-    updated_at = Column(DateTime, default=datetime.now(datetime.timezone.utc), onupdate=datetime.now(datetime.timezone.utc), nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc), nullable=False)
