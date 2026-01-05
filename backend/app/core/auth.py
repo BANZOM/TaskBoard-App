@@ -38,7 +38,7 @@ def convert_to_httpx_request(fastapi_request: Request) -> httpx.Request:
 async def get_current_user(request: Request) -> AuthUser:
     httpx_request = convert_to_httpx_request(request)
     try:
-        request_state = await clerk.authenticate_request(
+        request_state = clerk.authenticate_request(
             httpx_request,
             AuthenticateRequestOptions(authorized_parties=[settings.FRONTEND_URL])
         )
